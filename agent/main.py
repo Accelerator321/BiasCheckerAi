@@ -14,6 +14,7 @@ CORS(app)
 
 @app.route("/biascheck", methods=["POST"])
 def check_bias():
+    
     content = request.get_json()
     
     return agent.print_response(f"check bias and rewrite if needed =>{content['text']}")
