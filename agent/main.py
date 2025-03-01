@@ -8,7 +8,7 @@ load_dotenv()
 PROD = os.getenv("PROD")
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route("/biascheck", methods=["POST"])
