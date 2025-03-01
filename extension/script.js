@@ -1,27 +1,28 @@
-const server = "https://4e17ad68-0f57-4be2-a42d-f6b7d56b443f-00-xb9vznuvzrfm.pike.replit.dev/biascheck"
+const server = "https://bias-checker-ai.vercel.app/biascheck"
 
 // chrome.storage.local.set({ "progress": "", id:""});
 
 chrome.storage.local.get(["progress","id"], (result) => {
+    if(!result) return;
     console.log(result.progress,"ds", " id ", result.id); 
     if(result.progress){
         document.body.innerHTML = result.progress;
         document.getElementById("sticky-button").addEventListener("click", (e) => {
             chrome.storage.local.get(["progress","id"], (result) => {
-                
+
                 if(result.progress && result.id){
                     console.log("res", result.id, result.progress)
                     chrome.storage.local.set({ "progress": "", id:""});
                     chrome.tabs.sendMessage(result.id, { action: "push_content", payload: result.progress });
                 }
-                
+
             });
-        
+
         });
-        
+
     }
 
-    
+
 });
 
 
@@ -33,13 +34,13 @@ document.addEventListener("DOMContentLoaded", function () {
     closeButton.style.top = "10px";
     closeButton.style.right = "10px";
     closeButton.style.width = "20px";
-    
+
     closeButton.style.background = "red";
     closeButton.style.color = "white";
     closeButton.style.border = "none";
     closeButton.style.cursor = "pointer";
-    
-   
+
+
     closeButton.addEventListener("click", () => {
         chrome.storage.local.set({ progress: "", id: "" }, () => {
             window.close(); 
@@ -56,8 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
     if (message.action === "url-fetched") {
-        
-        
+
+
         let res = await fetch(server, {
             method: "POST",
             headers: {
@@ -78,17 +79,17 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
             biasSection.id = "bias-analysis-section";
             biasSection.innerHTML =`<h2>Bias Analysis</h2><p>${res.bias}</p>`;
             document.body.prepend(biasSection);
-            
+
 
             let stickButton = document.createElement("button");
             stickButton.id = "sticky-button";
             stickButton.innerText ="Insert into Tab";
             document.body.prepend(stickButton);
-            
+
             chrome.storage.local.set({ "id":sender.tab.id,"progress": document.documentElement.outerHTML});
 
             stickButton.addEventListener("click", (e) => {
-                
+
                 chrome.storage.local.set({ "progress": "", id:""});
                 chrome.tabs.sendMessage(sender.tab.id, { action: "push_content", payload: document.documentElement.outerHTML });
 
@@ -101,7 +102,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
             document.getElementById("detectButton").style.display = 'initial';
         }
 
-        
+
         return true
     }
 });
@@ -109,7 +110,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
 document.getElementById("detectButton").addEventListener("click", (e) => {
     document.getElementsByClassName("loader-container")[0].style.display = "flex";
     e.target.style.display = 'none';
-    
+
     chrome.runtime.sendMessage({ action: "startProcessing" });
 });
 
