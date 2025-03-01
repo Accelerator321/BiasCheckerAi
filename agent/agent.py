@@ -17,7 +17,7 @@ instructions = [
     "Extract text and rewrite article return response in format instructed",
     '''Response format=>
     <bias>explain the biasness if any</bias>,
-    <output>rewrite the article html bias free and also add write css in for good ui</content>
+    <output>rewrite the article html bias free and also add write css in for good ui</output>
      ''',
     "It is strict instruction to write your response in the format told above xml format strictly"
 ]
