@@ -7,7 +7,27 @@ from phi.tools.duckduckgo import DuckDuckGo
 from pydantic import BaseModel, Field
 from phi.utils.pprint import pprint_run_response
 import re
+import requests
+from newspaper import Article
+from typing import Optional
 
+def fetch_article_text(url: str) -> Optional[str]:
+    """
+    Fetches article text from a given URL using Newspaper3k and requests.
+    """
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        article = Article(url)
+        article.download(input_html=response.text)  # Use manually fetched HTML
+        article.parse()
+        return article.text
+    else:
+        return None
 load_dotenv()
 
 instructions = [
@@ -24,6 +44,7 @@ instructions = [
 description = "This agent checks if the article is biased and rewrites the bias free article with html. It has necessary tools to fetch news from link and fetching other related articles and also has a bias checker."
 
 tools = [
+    fetch_article_text,
     Newspaper4k(),
     DuckDuckGo(news=True, fixed_max_results=6),
     HackerNews(get_top_stories=True)
