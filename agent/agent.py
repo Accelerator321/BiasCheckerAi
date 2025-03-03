@@ -61,6 +61,7 @@ agent = Agent(
 
 
 def check_bias(article, cnt=0):
+    print(article)
     try:
         if cnt >= 5:
             return {"bais": "", "content": ""}
@@ -70,7 +71,7 @@ def check_bias(article, cnt=0):
 
         res = res.dict()
         res = res['content']
-
+        print(res)
         bias = re.search(r'<bias>([\s\S]*?)</bias>', res, re.S).group(1)
         content = re.search(r'<output>([\s\S]*?)</output>', res, re.S).group(1)
 
