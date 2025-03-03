@@ -82,9 +82,9 @@ agent = Agent(
 
 
 def check_bias(article, cnt=0):
-    print(article)
+    # print(article)
     try:
-        if cnt >= 5:
+        if cnt >= 3:
             return {"bais": "", "content": ""}
         res = agent.run(
             f"fetch the news from link Rewrite the article if it is biased: {article}.",
@@ -92,7 +92,7 @@ def check_bias(article, cnt=0):
 
         res = res.dict()
         res = res['content']
-        print(res)
+       # print(res)
         bias = re.search(r'<bias>([\s\S]*?)</bias>', res, re.S)
         if bias: bias = bias.group(1)
         content = re.search(r'<output>([\s\S]*?)</output>', res, re.S)
@@ -116,7 +116,7 @@ def check_bias(article, cnt=0):
         if not out["content"]: return check_bias(article, cnt + 1)
         return out
     except Exception as e:
-        print(e)
+        # print(e)
         return check_bias(article, cnt + 1)
 
 
