@@ -51,7 +51,7 @@ tools = [
 #     ])
 
 agent = Agent(
-    model=Groq(id='deepseek-r1-distill-llama-70b'),
+    model=Groq(id='gemma2-9b-it'),
     tools=tools,
     description=description,
     # "This is the main it uses tools and also other team members to analyze the given article for bias and rewrite it bias free",
