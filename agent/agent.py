@@ -51,7 +51,7 @@ tools = [
 #     ])
 
 agent = Agent(
-    model=Groq(id='llama-3.1-8b-instant'),
+    model=Groq(id='deepseek-r1-distill-llama-70b'),
     tools=tools,
     description=description,
     # "This is the main it uses tools and also other team members to analyze the given article for bias and rewrite it bias free",
@@ -97,6 +97,6 @@ def check_bias(article, cnt=0):
 
 
 if __name__ == "__main__":
-    link = 'https://indianexpress.com/article/india/tamil-nadu-language-row-governor-dmk-stalin-centre-9861034/?ref=hometop_hp'
+    link = 'https://www.hindustantimes.com/india-news/only-source-of-livelihood-ranveer-allahbadia-asks-sc-to-allow-him-to-upload-shows-101740992546533.html'
 
     print(check_bias(link))
