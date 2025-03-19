@@ -1,4 +1,5 @@
-const server = "http://127.0.0.1:5000/analyse"
+const server = "https://biascheckerai.onrender.com/analyse"
+// const server = "http://127.0.0.1:5000/analyse"
 
 // chrome.storage.local.set({ "progress": "", id:""});
 
