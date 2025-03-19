@@ -53,9 +53,9 @@ agent = initialize_agent(
 def bias_checker(query):
     prompt = template.format(query = query)
     res = agent.invoke(prompt)
-    print(res)
+   # print(res)
     ans= parse_agent_response(res["output"])
-    print(ans)
+   # print(ans)
     # ans= parse_agent_response(res)
     
     return ans
