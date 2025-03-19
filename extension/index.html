@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 17px;
+        }
+        button{
+            width: 200px;
+        border: 2px solid #77bcdbcf;
+        background: #00ff5c54;
+        height: 25px;
+        border-radius: 7px;
+        cursor: pointer;
+        
+        }
+        .loader-container {
+            display: none;
+            flex-direction: hidden;
+            align-items: center;
+            justify-content: center;
+            
+            background-color: #f8f9fa;
+        }
+
+        /* Loader Animation */
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.2);
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Keyframes for spinning effect */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Loading text */
+        .loading-text {
+            margin-top: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+    </style>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    display: flex
+;
+   
+    margin: 4px 17px;
+    flex-direction: column;
+}
+
+article {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2, h3 {
+    margin-bottom: 15px;
+    color: #2a9d8f;
+    font-family: 'Georgia', serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    border-bottom: 2px solid #2a9d8f;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 1.4em;
+    margin-top: 20px;
+    color: #264653;
+}
+
+p {
+    margin-bottom: 20px;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+ul {
+    margin: 15px 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+li {
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+blockquote {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #e9ecef;
+    border-left: 5px solid #2a9d8f;
+    font-style: italic;
+    color: #555;
+}
+
+a {
+    color: #e76f51;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #d62828;
+    text-decoration: underline;
+}
+
+code {
+    background-color: #f4f4f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: #2a9d8f;
+}
+
+    </style>
+    
+</head>
+<body>
+    <h1>Welcome to BiasChecker</h1>
+    <h3>Click on button below to get bias analysis and bias free article</h1>
+
+    <button id = "detectButton"> Detect Bias </button>
+    <!-- <button id = "sticky-button" style="display: none;">Insert into Tab</button> -->
+    <div class="loader-container">
+        <div class="loader"></div>
+        <p class="loading-text">Please wait a few seconds...</p>
+    </div>
+</body>
+
+<script src = "script.js"></script>
+</html>

@@ -1,0 +1,4 @@
+agent/.env
+agent/myenv/
+
+__pycache__
