@@ -24,4 +24,6 @@ def analyse():
         return jsonify({"err": "internal server error"})
 
 if __name__ == "__main__":
-    app.run(debug=not os.getenv("PROD", False))
+    
+    port = int(os.getenv("PORT", 5000)) 
+    app.run(host='0.0.0.0', port=port, debug = not int(os.getenv("PROD", 0))) 
