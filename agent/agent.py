@@ -4,9 +4,12 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import initialize_agent
 from dotenv import load_dotenv
 import re
+import os
 
 
 load_dotenv()
+
+PROD = int(os.getenv("PROD", 0))
 
 template = """
 You are an expert media analyst specialized in detecting and addressing bias in articles. 
@@ -32,7 +35,7 @@ llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-flash", temperature=0.3)
 agent = initialize_agent(
     tools=[web_search, news_loader_tool,fallback_news_loader_tool],
     llm=llm,
-    verbose=True,
+    verbose=not PROD,
     handle_parsing_errors=True,
 )
 
