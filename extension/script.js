@@ -27,8 +27,7 @@ chrome.storage.local.get(["progress","id"], (result) => {
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Create a button element
+function addCloseButton(){
     let closeButton = document.createElement("button");
     closeButton.innerText = "X";
     closeButton.style.position = "fixed";
@@ -50,7 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     document.body.appendChild(closeButton);
-});
+}
+
+document.addEventListener("DOMContentLoaded", addCloseButton);
 
 
 
@@ -71,6 +72,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
         });
 
         res= await res.json();
+        console.log(res)
         document.getElementsByClassName("loader-container")[0].style.display = "none";
 
         if(res.content) {
@@ -86,6 +88,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
             stickButton.id = "sticky-button";
             stickButton.innerText ="Insert into Tab";
             document.body.prepend(stickButton);
+            addCloseButton();
 
             chrome.storage.local.set({ "id":sender.tab.id,"progress": document.documentElement.outerHTML});
 
